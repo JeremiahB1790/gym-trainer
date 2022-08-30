@@ -28,6 +28,11 @@ export default function CredentialsForm({type}: CredentialsFormProps){
         const [password, setPassword] = useState<string>("")
 
 
+
+        function submit(){
+            console.log(username, password);
+        
+        }
         
 
    return <>
@@ -35,6 +40,6 @@ export default function CredentialsForm({type}: CredentialsFormProps){
         <br></br>
         <input type="password" placeholder="password" value={password}/>
         <br></br>
-        <button>{type}</button>
+        <button onClick={submit}>{type}</button>
    </>
 }
