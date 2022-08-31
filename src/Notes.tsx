@@ -1,3 +1,5 @@
+import {useState, useEffect} from "react"
+
 // <HelloWorld key="value" name="props" location="React"/>
     //     {/*    HelloWorld({key="value", name="props", location="React"}) */}
     // <HelloWorld name="Douglas" location="Brandon" showLocation={true}/>
@@ -29,3 +31,18 @@ function HelloWorld(props:any){
   function Dashboard(){
     return <h1>Dashboard</h1>
   }
+
+
+  const [x, setX] = useState<number>(0);
+        const [y, setY] = useState<number>(0);
+
+
+        // useEffect(callback, *dependency array)
+        //      use effect allows us to declare state variables the when changed, triggers the callback
+        //      the effect of having NO dependency array, means you're dependent on EVERYTHING
+        //      the effect of having an EMPTY dependency array, means you're dependent on NOTHING except PAGE LOAD
+        //     
+        
+        // const func = () => console.log("username")
+        // useEffect(() => console.log("password"), [password]);
+        // useEffect(() => console.log("username + password"), [username, password]);

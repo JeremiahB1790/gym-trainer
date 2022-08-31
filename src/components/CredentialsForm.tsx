@@ -1,10 +1,10 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 
 interface CredentialsFormProps{
-    type: CredentialFormType
+    type: CredentialsFormType
 }
 
-type CredentialFormType = "Login" | "Register"
+type CredentialsFormType = "Login" | "Register"
 
 export default function CredentialsForm({type}: CredentialsFormProps){
         // State
@@ -22,23 +22,19 @@ export default function CredentialsForm({type}: CredentialsFormProps){
         //      useState returns an array of two elements
         //      [stateVariable, functionToUpdateTheState]
         //      useState gets passed an argument of the initial value
-
-
         const [username, setUsername] = useState<string>("")
         const [password, setPassword] = useState<string>("")
 
-
-
         function submit(){
-            console.log(username, password);
-        
+            // make an api call to our api to see if their creds match
+            //      if they do -> log them in -> redirect them to the home
         }
-        
+
 
    return <>
-        <input type="text" placeholder="username" value={username} /> 
+        <input type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)} /> 
         <br></br>
-        <input type="password" placeholder="password" value={password}/>
+        <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         <br></br>
         <button onClick={submit}>{type}</button>
    </>
