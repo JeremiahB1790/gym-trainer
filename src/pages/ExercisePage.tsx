@@ -75,10 +75,33 @@ export default function ExercisePage(){
 
     function pageLoad(){
         // fetch and bind data
+        fetchData()
     }
 
-    // TODO: Fetch the data from the api: https://wger.de/api/v2/exercise?language=2
+    function fetchData(): void{
+        // TODO: replace with an actual API call using Axios
+        //      resolve the promise, convert the body to JSON, map it to an Array<ExerciseData> and return it
 
+        fetch('https://wger.de/api/v2/exercise?language=2')
+            .then((response) => response.json())
+            .then((data) => setExercises(mapData(data)));
+    }
+
+    function mapData(data: any): Array<ExerciseData>{
+        return data.results.map(({id, name, exercise_base, description, category, muscles, muscles_secondary, equipment, variations}: any) => {
+            return {
+                "id": id,
+                "name": name,
+                "exercise_base": exercise_base,
+                "description": description,
+                "category": category,
+                "muscles": muscles,
+                "muscles_secondary": muscles_secondary,
+                "equipment": equipment,
+                "variations": variations
+            }
+        })
+    }
 
 
     return !exercises ? 
