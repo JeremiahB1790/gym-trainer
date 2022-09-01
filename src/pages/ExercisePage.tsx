@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import Exercise from "../components/Exercise";
+import { WORKOUT_API } from "../util/ApiConfig";
 
 export interface ExerciseData{
     id: number;
@@ -84,7 +85,8 @@ export default function ExercisePage(){
 
         fetch('https://wger.de/api/v2/exercise?language=2')
             .then((response) => response.json())
-            .then((data) => setExercises(mapData(data)));
+            .then((data) => setExercises(mapData(data)))
+        return tempExercises;
     }
 
     function mapData(data: any): Array<ExerciseData>{
@@ -108,7 +110,7 @@ export default function ExercisePage(){
     
          <LoadingBar /> :
          <>
-            {exercises.map((exercise: ExerciseData) => <Exercise exercise={exercise}/>)}
+            {exercises.map((exercise: ExerciseData, i) => <Exercise key={i} exercise={exercise}/>)}
          </>
         
 }
