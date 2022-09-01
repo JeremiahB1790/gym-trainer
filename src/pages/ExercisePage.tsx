@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import Exercise from "../components/Exercise";
+import { WORKOUT_API } from "../util/ApiConfig";
 
 export interface ExerciseData{
     id: number;
@@ -78,14 +79,17 @@ export default function ExercisePage(){
         fetchData()
     }
 
-    function fetchData(): Array<ExerciseData>{
+    function fetchData(): void{
         // TODO: replace with an actual API call using Axios
         //      resolve the promise, convert the body to JSON, map it to an Array<ExerciseData> and return it
 
-        fetch('https://wger.de/api/v2/exercise?language=2')
-            .then((response) => response.json())
-            .then((data) => setExercises(mapData(data)))
-        return tempExercises;
+        // fetch('https://wger.de/api/v2/exercise?language=2')
+        //     .then((response) => response.json())
+        //     .then((data) => setExercises(mapData(data)))
+
+        WORKOUT_API.get('exercise?language=2')
+            .then(response => setExercises(mapData(response.data)))
+
     }
 
     function mapData(data: any): Array<ExerciseData>{
@@ -109,7 +113,7 @@ export default function ExercisePage(){
     
          <LoadingBar /> :
          <>
-            {exercises.map((exercise: ExerciseData) => <Exercise exercise={exercise}/>)}
+            {exercises.map((exercise: ExerciseData, i) => <Exercise key={i} exercise={exercise}/>)}
          </>
         
 }
