@@ -83,10 +83,12 @@ export default function ExercisePage(){
         // TODO: replace with an actual API call using Axios
         //      resolve the promise, convert the body to JSON, map it to an Array<ExerciseData> and return it
 
-        fetch('https://wger.de/api/v2/exercise?language=2')
-            .then((response) => response.json())
-            .then((data) => setExercises(mapData(data)))
-        return tempExercises;
+        // fetch('https://wger.de/api/v2/exercise?language=2')
+        //     .then((response) => response.json())
+        //     .then((data) => setExercises(mapData(data)))
+
+        WORKOUT_API.get('exercise?language=2')
+            .then(response => setExercises(mapData(response.data)))
     }
 
     function mapData(data: any): Array<ExerciseData>{
