@@ -1,12 +1,15 @@
 import {useState} from "react"
+import { AppUser } from "../App"
 
 interface CredentialsFormProps{
-    type: CredentialFormType
+    appUser: AppUser | null;
+    type: CredentialFormType;
+    setAppUser: Function;
 }
 
 type CredentialFormType = "Login" | "Register"
 
-export default function CredentialsForm({type}: CredentialsFormProps){
+export default function CredentialsForm({type, appUser, setAppUser}: CredentialsFormProps){
         // State
         //      the state of a component is a self contained representation of its
         //      its currently held values
@@ -30,15 +33,20 @@ export default function CredentialsForm({type}: CredentialsFormProps){
 
 
         function submit(){
-            console.log(username, password);
-        
+            const user: AppUser = {
+                username: username,
+                password: password
+            }
+            // TODO: call the API to log them in -> return a token
+            //      lift the state of appUser back up to our App component
+            setAppUser(user);
         }
         
 
    return <>
-        <input type="text" placeholder="username" value={username} /> 
+        <input type="text" placeholder="username" value={username} onChange={(e) => setUsername(e.target.value)}/> 
         <br></br>
-        <input type="password" placeholder="password" value={password}/>
+        <input type="password" placeholder="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         <br></br>
         <button onClick={submit}>{type}</button>
    </>
