@@ -1,26 +1,21 @@
-import { useEffect, useState } from "react";
+
+import React, { useEffect, useState } from "react";
 
 import Navbar from "./components/Navbar/Navbar";
 import Routes from "./components/Routes";
+import AppUserProvider from "./context/AppUserProvider";
 
-
-export interface AppUser {
-  username: string;
-  password: string;
-}
+// React Context API -> allows to define a context that is visible throughout our app
+//    Essentially CONTEXT is GLOBAL STATE
+//      1. Establish a Context
+//      2. Wrap your components within the Context.Provider component
+//      3. Pass the value of the state variable as a property to the Provider
+//      4. In a component that needs access to the state of the context, use the useContext(ProviderName) hook
 
 function App() {
-  //  We're going to need a state variable to track who is logged in
-  //  MANY of my components will need visibility and the ability to update the state variable
-
-  const init = {username: "test", password: "test"}
-  const [appUser, setAppUser] = useState<AppUser | null>(null)
-
-  useEffect(() => console.log(appUser), [appUser])
-
   return <> 
-      <Navbar appUser={appUser}/>
-      <Routes appUser={appUser} setAppUser={setAppUser}/>
+          <Navbar />
+          <Routes />
   </>
 }
 

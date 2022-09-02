@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import ContextProviders from './context/ContextProviders';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +13,9 @@ root.render(
   <React.StrictMode>
     {/* BrowserRouter is a High-Order component and is intended to wrap components to inject f(x)*/} 
     <BrowserRouter>
-      <App/>
+      <ContextProviders>
+        <App/>
+      </ContextProviders>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,15 +1,13 @@
-import {useState} from "react"
-import { AppUser } from "../App"
+import {useContext, useState} from "react"
+import { AppUser, AppUserUpdateContext } from "../context/AppUserProvider";
 
 interface CredentialsFormProps{
-    appUser: AppUser | null;
     type: CredentialFormType;
-    setAppUser: Function;
 }
 
 type CredentialFormType = "Login" | "Register"
 
-export default function CredentialsForm({type, appUser, setAppUser}: CredentialsFormProps){
+export default function CredentialsForm({type}: CredentialsFormProps){
         // State
         //      the state of a component is a self contained representation of its
         //      its currently held values
@@ -26,7 +24,7 @@ export default function CredentialsForm({type, appUser, setAppUser}: Credentials
         //      [stateVariable, functionToUpdateTheState]
         //      useState gets passed an argument of the initial value
 
-
+        const setAppUser = useContext(AppUserUpdateContext);
         const [username, setUsername] = useState<string>("")
         const [password, setPassword] = useState<string>("")
 
@@ -39,7 +37,8 @@ export default function CredentialsForm({type, appUser, setAppUser}: Credentials
             }
             // TODO: call the API to log them in -> return a token
             //      lift the state of appUser back up to our App component
-            setAppUser(user);
+            // if(setAppUser) setAppUser(user);
+            setAppUser!(user); // equivalent to the above
         }
         
 
